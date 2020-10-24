@@ -34,7 +34,7 @@ lapply(pacotes, library, character.only=TRUE)
 
 #============================= 1.IMPORTAÇÃO ==================================
 
-#setwd("~/R/PAC-PAM-PIA")
+setwd("~/R/PAC-PAM-PIA")
 
 # objeto com a entrada de dados a serem importados
 entrada  <- if (file.exists("Entrada/tab_1407.csv")) {
@@ -57,7 +57,7 @@ tab_1407 <- fread(entrada,
 
 # primeiro filtramos os dados
 n_divisao <- tab_1407[Territorio %like% "Minas" #& Divisão %like% "atacado"
-									    ][, Rank := frank(-Valor, na.last = "keep"), by = Ano]
+                      ][, Rank := frank(-Valor, na.last = "keep"), by = Ano]
 
 
 # EXEMPLO 2 -------------------------------------------------------------------	
@@ -65,15 +65,15 @@ n_divisao <- tab_1407[Territorio %like% "Minas" #& Divisão %like% "atacado"
 
 # primeiro filtramos os dados
 n_territorio <- tab_1407[Territorio %like% "Minas|Janeiro|Paulo|Sudeste" &
-												 Divisao %like% "varejista"]
+                         Divisao %like% "varejista"]
 
 # EXEMPLO 3 -------------------------------------------------------------------
 #  Todos os Estados, 1 Variável, 2 Divisões (em formato wide) e 6 anos
 
 wide_div <- tab_1407[!(Territorio %like% "Brasil|Região") &
-											 Divisao %like% "veículos,|4.4Combustíveis" &
-											 Ano %in% as.factor(2013:2018)] %>%
-						dcast(Ano + Territorio ~ Divisao, value.var = "Valor")
+                     Divisao %like% "veículos,|4.4Combustíveis" &
+                     Ano %in% as.factor(2013:2018)] %>%
+                       dcast(Ano + Territorio ~ Divisao, value.var = "Valor")
 
 # simplificar nomes de colunas
 colnames(wide_div)[3:4] = c("Comercio.de.veiculos", "Combustiveis")

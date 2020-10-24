@@ -36,13 +36,14 @@ lapply(pacotes, library, character.only=TRUE)
 
 #============================= 1.IMPORTAÇÃO ==================================
 
-#setwd("~/R/PAC-PAM-PIA")
+setwd("~/R/PAC-PAM-PIA")
 
 # objeto com a entrada de dados a serem importados
+url_1848 <-  "https://sidra.ibge.gov.br/geratabela?format=us.csv&name=tabela1848.csv&terr=NC&rank=-&query=t/1848/n1/all/n3/all/v/631,673,810,811,834,840/p/all/c12762/allxt/l/,,p%2Bt%2Bv%2Bc12762"
 if (file.exists("Entrada/tab_1848.csv")) {
   entrada <- "Entrada/tab_1848.csv"
 } else {
-  entrada <- "https://sidra.ibge.gov.br/geratabela?format=us.csv&name=tabela1848.csv&terr=NC&rank=-&query=t/1848/n1/all/n3/all/v/631,673,810,811,834,840/p/all/c12762/allxt/l/,,p%2Bt%2Bv%2Bc12762"
+  entrada <- url_1848
 }
 
 # importar tabela
